@@ -16,9 +16,9 @@ const isLiked = (id) => {
 };
 
 const addToLiked = (id) => {
-  // console.log(id)
   likedPostsId.push(id);
-  showPosts(posts);
+  likedPostsId.includes(id)
+  reportPost()
 };
 
 const reportPost = (id) => {
@@ -87,9 +87,10 @@ const createPost = (post) => {
               <div class="post__footer">
                 <div class="post__buttons">
                   <button class="post__button" onclick="addToLiked(${post.id})">
-                  <i class="fa-solid fa-heart ${isLiked(post.id) && "text-danger"}"></i>
+                  <i class="fa-solid fa-heart ${isLiked(post.id) && "text-danger"
+    }"></i>
                     
-                  </button>
+                  </button >
                   <button class="post__button">
                     <i class="fa-solid fa-comment"></i>
                   </button>
@@ -101,7 +102,7 @@ const createPost = (post) => {
     })">
                     <i class="fa-solid fa-ban"></i>
                   </button>
-                </div>
+                </div >
 
                 <div class="post__content">${displayContent(post.description)}</div>
 
@@ -128,8 +129,8 @@ const createPost = (post) => {
                   </div>
                   <span class="post__date-time">30 minutes ago</span>
                 </div>
-              </div>
-      `;
+              </div >
+  `;
   return div;
 };
 
@@ -144,10 +145,13 @@ const showPosts = (posts) => {
 };
 
 const displayLikedPosts = () => {
+  document.getElementById('liked').innerHTML = ''
+
   const likedPosts = getLikedPosts();
   likedPosts.forEach((post) => {
     const div = createPost(post);
     document.getElementById("liked").appendChild(div);
+
   });
 };
 
@@ -155,7 +159,6 @@ const displayReportedPosts = () => {
   document.getElementById('reported').innerHTML = ''
   const reportedPosts = getReportedPosts();
   reportedPosts.forEach((post) => {
-    console.log(posts)
     const div = createPost(post);
     document.getElementById("reported").appendChild(div);
   });
